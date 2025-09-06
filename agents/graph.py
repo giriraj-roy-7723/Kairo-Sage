@@ -39,9 +39,20 @@ def architect_agent(state:dict)->str:
     return {"task_plan":resp}
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #Defining a coder agent
+def coder_agent(state:dict)->dict:
+    steps=state["task_plan"].implementation_Steps
+    current_step_index=0
+    current_task=steps[current_step_index]
+    user_prompt=f"""Task: {current_task.task_description}"""
+    system_prompt=coder_system_prompt()
+    resp=llm.invoke(system_prompt+user_prompt)
+    return {"code":resp.content}
+
 graph.add_node("planner",planner_agent)
 graph.add_node("architect",architect_agent)
 graph.add_edge("planner","architect")
+graph.add_node("coder",coder_agent)
+graph.add_edge("architect","coder")
 graph.set_entry_point("planner")
 agent=graph.compile()
 resp=agent.invoke({"user_prompt":user_prompt})
