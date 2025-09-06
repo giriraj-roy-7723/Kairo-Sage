@@ -1,0 +1,33 @@
+/* Clock Application Styles */
+
+/* Full-screen flex container */
+.clock-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f0f0;
+}
+
+/* Clock display styling */
+.clock-display {
+    font-family: monospace;
+    font-size: 6rem;
+    color: #333;
+}
+
+/* Toggle button styling */
+.toggle-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .clock-display {
+        font-size: 4rem;
+    }
+}
